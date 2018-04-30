@@ -1,5 +1,8 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -37,7 +40,17 @@ public class MethodReference {
 		System.out.println("----------------------");
 		// method reference to a static method, optimized way.
 		Stream.generate(Math::random).limit(5).forEach(System.out::println);
-
+		
+		System.out.println("----------------------");
+		//invoking a multiple argument instance method from a class reference.
+		//invoking length method o nstring using a method reference
+		List<String> string = Arrays.asList("this","is" ,"a", "list", "of", "string");
+		
+		(string.stream().sorted((s1,s2) -> s1.compareTo(s2))
+				.collect(Collectors.toList()))
+		.stream().map(String::length)
+				.forEach(System.out::println);	
+		
 	}
 
 }
